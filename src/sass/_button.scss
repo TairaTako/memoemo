@@ -12,10 +12,13 @@
   border-right: solid 5px #5375bd;
   cursor: pointer;
 
-  &--remove {
+  &--red {
     background: #E53238;
     border-bottom: solid 5px #B31313;
     border-right: solid 5px #B31313;
+  }
+
+  &--remove {
     padding: 4px 8px;
   }
 

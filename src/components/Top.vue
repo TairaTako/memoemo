@@ -4,7 +4,7 @@
       <input class="form__input" type="text" v-model="message">
       <button class="button" v-on:click="submit">送信</button>
     </div>
-    <transition-group name="list" tag="ul" class="chatList">
+    <transition-group name="list" tag="ul" class="chatList container">
       <Item v-for="post in posts" :key="post.id" :post="post" class="chatList__item"/>
     </transition-group>
   </div>
@@ -12,7 +12,9 @@
 
 <script>
 import Item from '@/components/Item'
+import { auth } from '@/main'
 import { db } from '@/main'
+
 export default {
   name: 'Top',
   components: {
@@ -21,8 +23,14 @@ export default {
   data() {
     return {
       posts: [],
-      message: ""
+      message: "",
+      currentUser: {}
     }
+  },
+  created() {
+    auth.onAuthStateChanged((user) => {
+      this.currentUser = user
+    })
   },
   methods: {
     submit: function() {
@@ -32,7 +40,7 @@ export default {
       }
       else{
         db.collection('posts').add({
-          uid: this.uid = '0001',
+          uid: this.currentUser.uid,
           content: this.message,
           day: this.day = date.getMonth() + "/" + date.getDate(),
           time: this.time = date.getHours().toString().padStart(2, "0") + ":" + date.getMinutes().toString().padStart(2, "0") + ":" + date.getSeconds().toString().padStart(2, "0"),
@@ -68,11 +76,6 @@ export default {
 }
 
 .chatList {
-  width: 80%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0;
-
   &__item {
     display: flex;
     align-items: center;

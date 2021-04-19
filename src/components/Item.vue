@@ -4,7 +4,7 @@
     <span class="chat__time">{{ post.time }}</span>
     <span class="chat__content">{{ post.content }}</span>
     <span class="chat__name">{{ user.displayName }}</span>
-    <button class="button button--remove" v-on:click="remove(post.id)">×</button>
+    <button class="button button--red button--remove" v-on:click="remove(post.id)">×</button>
   </div>
 </template>
 
@@ -22,7 +22,6 @@ export default {
       day: "",
       time: "",
       user: "",
-      currentUser: ""
     }
   },
   firestore() {
