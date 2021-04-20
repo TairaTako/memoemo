@@ -5,7 +5,15 @@
       <p class="intro__text">さあ、どっち派か決めましょう</p>
     </div>
     <div class="form">
-      <input class="form__input" type="text" v-model="message" :disabled="this.currentUser == null">
+      <div class="form__group">
+        <input class="form__input" type="text" v-model="message" :disabled="this.currentUser == null">
+        <div class="form__inner">
+          <label for="" class="form__label">A</label>
+          <input class="form__input form__input--half" type="text" v-model="textA" :disabled="this.currentUser == null">
+          <label for="" class="form__label">B</label>
+          <input class="form__input form__input--half" type="text" v-model="textB" :disabled="this.currentUser == null">
+        </div>
+      </div>
       <button class="button" v-on:click="submit" :disabled="this.currentUser == null">送信</button>
     </div>
     <transition-group name="list" tag="ul" class="chatList container">
@@ -28,6 +36,8 @@ export default {
     return {
       posts: [],
       message: "",
+      textA: "",
+      textB: "",
       currentUser: {}
     }
   },
@@ -46,11 +56,18 @@ export default {
         db.collection('posts').add({
           uid: this.currentUser.uid,
           content: this.message,
+          textA: this.textA,
+          textB: this.textB,
+          pointA: 0,
+          pointB: 0,
           day: this.day = date.getMonth() + "/" + date.getDate(),
           time: this.time = date.getHours().toString().padStart(2, "0") + ":" + date.getMinutes().toString().padStart(2, "0") + ":" + date.getSeconds().toString().padStart(2, "0"),
-          created: this.day + this.time
+          created: this.day + this.time,
+          incrementedUser: []
         })
         this.message = ""
+        this.textA = ""
+        this.textB = ""
       }
     },
   },
@@ -96,7 +113,7 @@ export default {
     min-height: 60px;
     list-style: none;
     text-align: left;
-    padding: 16px 8px;
+    padding: 16px;
     border: 2px solid gray;
     border-radius: 5px;
     box-shadow: 0 6px 6px -6px #777;
@@ -121,26 +138,6 @@ export default {
   &__name {
     margin-left: auto;
     margin-right: 16px;
-  }
-}
-
-.form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 45px;
-  margin-bottom: 16px;
-
-  &__input {
-    margin-right: 16px;
-    border-radius: 3px;
-    border: 2px solid black;
-    height: 24px;
-    font-size: 17px;
-
-    &:disabled {
-      background: #A9A9B0;
-    }
   }
 }
 </style>

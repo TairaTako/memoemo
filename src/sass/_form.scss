@@ -1,0 +1,42 @@
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+
+  &__group {
+    margin-right: 8px;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  &__input {
+    width: 100%;
+    box-sizing: border-box;
+    // margin-right: 16px;
+    border-radius: 3px;
+    border: 2px solid black;
+    height: 24px;
+    font-size: 17px;
+
+    &:disabled {
+      background: #A9A9B0;
+    }
+
+    &--half {
+      width: 50%;
+
+      &:not(:last-child) {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  &__label {
+    margin-right: 4px;
+  }
+}

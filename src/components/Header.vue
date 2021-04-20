@@ -6,12 +6,12 @@
           <img :src="currentUser.photoURL">
         </div>
         <p class="user__name">{{ currentUser.displayName }}</p>
-        <button @click="signOut" class="button button--red button--small">サインアウト</button>
+        <button v-on:click="signOut" class="button button--red button--small">サインアウト</button>
       </div>
     </div>
 
     <div v-else class="user">
-      <button @click="signIn" class="button button--small">サインイン</button>
+      <button v-on:click="signIn" class="button button--small">サインイン</button>
     </div>
   </div>
 </template>
@@ -60,6 +60,7 @@ export default {
 
     img {
       width: 100%;
+      border-radius: 50%;
     }
   }
 
