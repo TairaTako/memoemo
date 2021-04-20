@@ -2,13 +2,16 @@
   <div class="container">
     <div v-if="currentUser">
       <div class="user">
+        <div class="user__image">
+          <img :src="currentUser.photoURL">
+        </div>
         <p class="user__name">{{ currentUser.displayName }}</p>
-        <button @click="signOut" class="button button--red">サインアウト</button>
+        <button @click="signOut" class="button button--red button--small">サインアウト</button>
       </div>
     </div>
 
     <div v-else class="user">
-      <button @click="signIn" class="button">サインイン</button>
+      <button @click="signIn" class="button button--small">サインイン</button>
     </div>
   </div>
 </template>
@@ -29,7 +32,8 @@ export default {
       const provider = new firebase.auth.GoogleAuthProvider()
       auth.signInWithPopup(provider).then((result) => {
         db.collection('users').doc(result.user.uid).set({
-          displayName: result.user.displayName
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL
         })
       })
     },
@@ -51,8 +55,17 @@ export default {
   align-items: center;
   justify-content: flex-end;
 
+  &__image {
+    width: 32px;
+
+    img {
+      width: 100%;
+    }
+  }
+
   &__name {
     margin-right: 16px;
+    margin-left: 8px;
   }
 }
 </style>

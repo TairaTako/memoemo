@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header/>
-    <img alt="Vue logo" src="./assets/logo.png">
+    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <Top/>
   </div>
 </template>
@@ -21,11 +21,8 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family:"Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
 }
 </style>

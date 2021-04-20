@@ -3,15 +3,20 @@
     <span class="chat__time chat__time--day">{{ post.day }}</span>
     <span class="chat__time">{{ post.time }}</span>
     <span class="chat__content">{{ post.content }}</span>
+    <div class="user__image chat__image">
+      <img :src="user.photoURL">
+    </div>
     <span class="chat__name">{{ user.displayName }}</span>
-    <button class="button button--red button--remove" v-on:click="remove(post.id)">×</button>
+    <div v-if="currentUser">
+      <button class="button button--red button--remove" v-on:click="remove(post.id)" v-if="post.uid == currentUser.uid">×</button>
+    </div>
   </div>
 </template>
 
 <script>
 import { db } from '@/main'
 export default {
-  props: ['post'],
+  props: ['post','currentUser'],
   methods: {
     remove: function(id) {
       db.collection('posts').doc(id).delete()
@@ -21,7 +26,7 @@ export default {
     return {
       day: "",
       time: "",
-      user: "",
+      user: {},
     }
   },
   firestore() {
@@ -43,8 +48,12 @@ export default {
     margin-left: 24px;
   }
 
-  &__name {
+  &__image {
     margin-left: auto;
+    margin-right: 8px;
+  }
+
+  &__name {
     margin-right: 16px;
   }
 }

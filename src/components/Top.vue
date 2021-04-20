@@ -1,11 +1,15 @@
 <template>
   <div>
+    <div class="intro">
+      <h1 class="intro__title font--orelega">WhitchPedia</h1>
+      <p class="intro__text">さあ、どっち派か決めましょう</p>
+    </div>
     <div class="form">
-      <input class="form__input" type="text" v-model="message">
-      <button class="button" v-on:click="submit">送信</button>
+      <input class="form__input" type="text" v-model="message" :disabled="this.currentUser == null">
+      <button class="button" v-on:click="submit" :disabled="this.currentUser == null">送信</button>
     </div>
     <transition-group name="list" tag="ul" class="chatList container">
-      <Item v-for="post in posts" :key="post.id" :post="post" class="chatList__item"/>
+      <Item v-for="post in posts" :key="post.id" :post="post" :currentUser="currentUser" class="chatList__item"/>
     </transition-group>
   </div>
 </template>
@@ -38,7 +42,7 @@ export default {
       if (this.message == "") {
         alert("入力してください")
       }
-      else{
+      else {
         db.collection('posts').add({
           uid: this.currentUser.uid,
           content: this.message,
@@ -73,6 +77,16 @@ export default {
 .list-leave,
 .list-enter-to {
   opacity: 1;
+}
+
+.intro {
+  margin: 32px 0;
+
+  &__title {
+    font-size: 38px;
+    line-height: 1.2;
+    color: black;
+  }
 }
 
 .chatList {
@@ -123,6 +137,10 @@ export default {
     border: 2px solid black;
     height: 24px;
     font-size: 17px;
+
+    &:disabled {
+      background: #A9A9B0;
+    }
   }
 }
 </style>
