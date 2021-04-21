@@ -48,25 +48,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-.user {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  &__image {
-    width: 32px;
-
-    img {
-      width: 100%;
-      border-radius: 50%;
-    }
-  }
-
-  &__name {
-    margin-right: 16px;
-    margin-left: 8px;
-  }
-}
-</style>

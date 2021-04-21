@@ -7,7 +7,7 @@
           <button class="button button--red button--remove" v-on:click="remove(post.id)" v-if="post.uid == currentUser.uid">×</button>
         </div>
       </div>
-      <ol class="chat__body" type="A">
+      <ul class="chat__body">
         <li class="chat__text" v-on:click="incrementA(post.id, currentUser.uid)">
           <span>{{ post.textA }}</span>
           <span class="chat__point">{{ post.pointA }}</span>
@@ -16,7 +16,7 @@
           <span>{{ post.textB }}</span>
           <span class="chat__point">{{ post.pointB }}</span>
         </li>
-      </ol>
+      </ul>
       <div class="chat__footer">
         <div class="chat__userInfo">
           <div class="user__image chat__image">
@@ -81,62 +81,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.chat {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &__time {
-    display: inline-block;
-    margin-right: 16px;
-  }
-
-  &__content {
-    font-size: 24px;
-    font-weight: bold;
-  }
-
-  &__body {
-    margin: 16px 0;
-    margin-left: 8px;
-  }
-
-  &__text {
-    font-size: 24px;
-    list-style-type: upper-alpha;
-    list-style-position: inside;
-
-    &:not(:last-child) {
-      margin-bottom: 8px;
-    }
-  }
-
-  &__point {
-    margin-left: 8px;
-    color: #668ad8;
-  }
-
-  &__footer {
-    display: flex;
-    align-items: center;
-  }
-
-  &__userInfo {
-    display: flex;
-    align-items: center;
-    margin-right: auto;
-  }
-
-  &__image {
-    margin-right: 8px;
-  }
-}
-</style>

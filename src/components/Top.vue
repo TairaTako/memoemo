@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="intro">
-      <h1 class="intro__title font--orelega">WhitchPedia</h1>
+      <h1 class="intro__title font--orelega">WhichPedia</h1>
       <p class="intro__text">さあ、どっち派か決めましょう</p>
     </div>
-    <div class="form">
+    <div class="form container">
       <div class="form__group">
         <input class="form__input" type="text" v-model="message" :disabled="this.currentUser == null">
         <div class="form__inner">
@@ -122,22 +122,6 @@ export default {
     &:not(:last-child) {
       margin-bottom: 16px;
     }
-  }
-}
-
-.chat {
-  &__time {
-    display: inline-block;
-    margin-right: 16px;
-  }
-
-  &__content {
-    margin-left: 24px;
-  }
-
-  &__name {
-    margin-left: auto;
-    margin-right: 16px;
   }
 }
 </style>
