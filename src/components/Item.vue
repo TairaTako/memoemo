@@ -17,6 +17,7 @@
           <span class="chat__point">{{ post.pointB }}</span>
         </li>
       </ul>
+      <Chart :post="post" />
       <div class="chat__footer">
         <div class="chat__userInfo">
           <div class="user__image chat__image">
@@ -34,9 +35,13 @@
 <script>
 import firebase from "firebase"
 import { db } from '@/main'
+import Chart from '@/components/Chart'
 
 export default {
   props: ['post','currentUser'],
+  components: {
+    Chart
+  },
   methods: {
     remove: function(id) {
       db.collection('posts').doc(id).delete()
