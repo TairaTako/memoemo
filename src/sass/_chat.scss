@@ -34,9 +34,31 @@
     border-radius: 25px;
     color: #668ad8;
     padding: 8px 16px;
+    cursor: pointer;
 
     &:not(:last-child) {
       margin-right: 8px;
+    }
+
+    &.is-active {
+      background-color: #668ad8;
+      color: white;
+
+      .chat__select {
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 7px;
+          right: -20px;
+          transform: rotate(50deg);
+          width: 6px;
+          height: 10px;
+          border-right: 4px solid white;
+          border-bottom: 4px solid white;
+        }
+      }
     }
   }
 

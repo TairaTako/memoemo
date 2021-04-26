@@ -63,7 +63,9 @@ export default {
           day: this.day = date.getMonth() + "/" + date.getDate(),
           time: this.time = date.getHours().toString().padStart(2, "0") + ":" + date.getMinutes().toString().padStart(2, "0") + ":" + date.getSeconds().toString().padStart(2, "0"),
           created: this.day + this.time,
-          incrementedUser: []
+          incrementedUser: [],
+          incrementedUserA: [],
+          incrementedUserB: []
         })
         this.message = ""
         this.textA = ""

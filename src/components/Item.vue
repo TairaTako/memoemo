@@ -8,16 +8,18 @@
         </div>
       </div>
       <ul class="chat__body">
-        <li class="chat__text" v-on:click="incrementA(post.id, currentUser.uid)">
-          <span>{{ post.textA }}</span>
-          <span class="chat__point">{{ post.pointA }}</span>
+        <li class="chat__text" v-on:click="incrementA(post.id, currentUser.uid)" :class="{'is-active': isActiveA}">
+          <span class="chat__select">{{ post.textA }}</span>
+          <!-- <span class="chat__point">{{ post.pointA }}</span> -->
         </li>
-        <li class="chat__text" v-on:click="incrementB(post.id, currentUser.uid)">
-          <span>{{ post.textB }}</span>
-          <span class="chat__point">{{ post.pointB }}</span>
+        <li class="chat__text" v-on:click="incrementB(post.id, currentUser.uid)" :class="{'is-active': isActiveB}">
+          <span class="chat__select">{{ post.textB }}</span>
+          <!-- <span class="chat__point">{{ post.pointB }}</span> -->
         </li>
       </ul>
-      <Chart :post="post" />
+      <div v-if="loading">
+        <Chart :post="post" />
+      </div>
       <div class="chat__footer">
         <div class="chat__userInfo">
           <div class="user__image chat__image">
@@ -52,7 +54,8 @@ export default {
         const add = firebase.firestore.FieldValue.arrayUnion(uid)
         db.collection('posts').doc(id).update({
           pointA: increment,
-          incrementedUser: add
+          incrementedUser: add,
+          incrementedUserA: add
         })
       }
     },
@@ -62,14 +65,30 @@ export default {
         const add = firebase.firestore.FieldValue.arrayUnion(uid)
         db.collection('posts').doc(id).update({
           pointB: increment,
-          incrementedUser: add
+          incrementedUser: add,
+          incrementedUserB: add
         })
       }
+    },
+    getImage: function(params) {
+      return params
+    }
+  },
+  watch: {
+    post: function(){
+      this.loading = false
+      this.$nextTick(() => (this.loading = true))
     }
   },
   computed: {
     boolean: function() {
       return this.$props.post.incrementedUser.includes(this.$props.currentUser.uid)
+    },
+    isActiveA: function() {
+      return this.$props.post.incrementedUserA.includes(this.$props.currentUser.uid)
+    },
+    isActiveB: function() {
+      return this.$props.post.incrementedUserB.includes(this.$props.currentUser.uid)
     }
   },
   data() {
@@ -77,6 +96,7 @@ export default {
       day: "",
       time: "",
       user: {},
+      loading: true,
     }
   },
   firestore() {
