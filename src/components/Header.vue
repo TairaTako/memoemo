@@ -30,7 +30,7 @@ export default {
   methods: {
     signIn() {
       const provider = new firebase.auth.GoogleAuthProvider()
-      auth.signInWithPopup(provider).then((result) => {
+      auth.signInWithRedirect(provider).then((result) => {
         db.collection('users').doc(result.user.uid).set({
           displayName: result.user.displayName,
           photoURL: result.user.photoURL

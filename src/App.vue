@@ -25,4 +25,10 @@ export default {
   text-align: center;
   margin-top: 60px;
 }
+
+@media screen and (max-width:480px) {
+  #app {
+    margin-top: 32px;
+  }
+}
 </style>
